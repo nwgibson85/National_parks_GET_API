@@ -4,6 +4,9 @@
 const apiKey = 'Fzu44deYrqnCFJgrh3Dg9Vd0jqlqcEckyzIz8OvG'; 
 const baseURL = 'https://www.developer.nps.gov/api/v1/parks';
 
+const options = {
+      "X-Api-Key:": apiKey
+};
 
 function formatQueryParams(params) {
   const queryItems = Object.keys(params)
@@ -33,14 +36,14 @@ function getParksByState(searchState, maxResults=10) {
   const params = {
     stateCode: searchState,
     limit: maxResults,
-    api_key: apiKey
+    // api_key: apiKey
   };
   const queryString = formatQueryParams(params)
   const url = baseURL + "?" + queryString;
 
   console.log(url);
 
-  fetch(url)
+  fetch(url, options)
     .then(response => {
       if (response.ok) {
         return response.json();
